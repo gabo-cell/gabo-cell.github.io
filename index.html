@@ -1,10 +1,542 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Meu site</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Anti-Sarah | Campanha de Vacinação</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8fb;
+            color: #17324d;
+        }
+
+        header {
+            background: white;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dce6ed;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #1261a0;
+        }
+
+        .logo span {
+            color: #21a179;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #17324d;
+            margin-left: 25px;
+            font-size: 15px;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #1261a0, #21a179);
+            color: white;
+            padding: 90px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            max-width: 650px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            padding: 8px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        h1 {
+            font-size: 52px;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 25px;
+            background: white;
+            color: #1261a0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .shield {
+            font-size: 150px;
+            opacity: 0.9;
+        }
+
+        section {
+            padding: 70px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #607587;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #dce6ed;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .card .icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #607587;
+            line-height: 1.6;
+        }
+
+        .campaign {
+            background: white;
+            text-align: center;
+            border-top: 1px solid #dce6ed;
+            border-bottom: 1px solid #dce6ed;
+        }
+
+        .campaign-box {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .campaign-box h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .campaign-box p {
+            color: #607587;
+            line-height: 1.7;
+        }
+
+        .notice {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff8df;
+            border-left: 5px solid #e5b700;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: #102536;
+            color: white;
+            padding: 40px 8%;
+            text-align: center;
+        }
+
+        footer p {
+            color: #b8c8d4;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        /* QUESTIONÁRIO */
+
+        .quiz {
+            max-width: 700px;
+            margin: 50px auto 0;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid #dce6ed;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .quiz h2 {
+            margin-bottom: 25px;
+        }
+
+        .question {
+            margin-bottom: 28px;
+        }
+
+        .question p {
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .option {
+            display: inline-block;
+            margin-right: 20px;
+            color: #17324d;
+        }
+
+        .quiz button {
+            margin-top: 10px;
+            padding: 14px 24px;
+            background: #1261a0;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .quiz button:hover {
+            background: #0e4d80;
+        }
+
+        #resultado {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: #f4f8fb;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 800px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .shield {
+                font-size: 90px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Olá!</h1>
-    <p>Este site está hospedado no GitHub.</p>
+
+<header>
+    <div class="logo">ANTI<span>•</span>SARAH</div>
+
+    <nav>
+        <a href="#campanha">Campanha</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#faq">FAQ</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-text">
+
+        <div class="tag">
+            CAMPANHA ESPECIAL 2026
+        </div>
+
+        <h1>
+            Proteção começa antes da mordida.
+        </h1>
+
+        <p>
+            Conheça a nova campanha de vacinação
+            <strong>Anti-Sarah</strong>, desenvolvida para
+            situações de risco envolvendo exposição
+            prolongada à Sarah.
+        </p>
+
+        <a class="button" href="#campanha">
+            Conhecer a campanha
+        </a>
+
+    </div>
+
+    <div class="shield">
+        🛡️
+    </div>
+</section>
+
+<section id="beneficios">
+
+    <div class="section-title">
+        <h2>Por que se proteger?</h2>
+        <p>Prevenção é melhor do que lidar com as consequências.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🧪</div>
+            <h3>Tecnologia avançada</h3>
+            <p>
+                Fórmula desenvolvida especialmente
+                para situações de exposição à Sarah.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🛡️</div>
+            <h3>Proteção direcionada</h3>
+            <p>
+                Uma abordagem específica para
+                reduzir os riscos relacionados à
+                presença de Sarah.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📋</div>
+            <h3>Campanha nacional</h3>
+            <p>
+                Disponibilidade limitada durante
+                a campanha especial de 2026.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="campaign" id="campanha">
+
+    <div class="campaign-box">
+
+        <h2>
+            A campanha já começou.
+        </h2>
+
+        <p>
+            Não espere os primeiros sintomas para
+            procurar proteção.
+        </p>
+
+        <div class="notice">
+            <strong>AVISO IMPORTANTE:</strong><br><br>
+
+            Esta página é uma paródia e não representa
+            uma vacina, empresa farmacêutica, órgão
+            governamental ou serviço de saúde real.
+        </div>
+
+    </div>
+
+</section>
+
+<section id="faq">
+
+    <div class="section-title">
+        <h2>Perguntas frequentes</h2>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Quem precisa da Anti-Sarah?</h3>
+            <p>
+                Pessoas que tenham sido expostas
+                a níveis potencialmente perigosos
+                de Sarah.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Existe contraindicação?</h3>
+            <p>
+                Sim. Consulte um profissional
+                qualificado antes de tomar qualquer
+                decisão relacionada à vacinação.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Onde posso tomar?</h3>
+            <p>
+                A campanha encontra-se atualmente
+                em fase experimental e fictícia.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- QUESTIONÁRIO -->
+
+    <div class="quiz">
+
+        <h2>Avaliação de risco Anti-Sarah</h2>
+
+        <div class="question">
+
+            <p>
+                Você esteve perto de Sarah nos últimos 7 dias?
+            </p>
+
+            <label class="option">
+                <input type="radio" name="exposicao" value="sim">
+                Sim
+            </label>
+
+            <label class="option">
+                <input type="radio" name="exposicao" value="nao">
+                Não
+            </label>
+
+        </div>
+
+        <div class="question">
+
+            <p>
+                Sarah falou diretamente com você?
+            </p>
+
+            <label class="option">
+                <input type="radio" name="falou" value="sim">
+                Sim
+            </label>
+
+            <label class="option">
+                <input type="radio" name="falou" value="nao">
+                Não
+            </label>
+
+        </div>
+
+        <button onclick="verificarRisco()">
+            Avaliar risco
+        </button>
+
+        <div id="resultado"></div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <strong>ANTI•SARAH</strong>
+
+    <p>
+        Campanha fictícia • Paródia • 2026
+    </p>
+
+    <p>
+        Nenhuma vacina real é oferecida por este site.
+    </p>
+
+</footer>
+
+<script>
+
+    function verificarRisco() {
+
+        const exposicao = document.querySelector(
+            'input[name="exposicao"]:checked'
+        );
+
+        const falou = document.querySelector(
+            'input[name="falou"]:checked'
+        );
+
+        const resultado = document.getElementById("resultado");
+
+        if (!exposicao || !falou) {
+
+            resultado.style.display = "block";
+
+            resultado.innerHTML = `
+                <strong>⚠️ AVALIAÇÃO INCOMPLETA</strong><br><br>
+                Responda às duas perguntas para calcular
+                seu nível de exposição à Sarah.
+            `;
+
+            return;
+        }
+
+        if (exposicao.value === "sim" && falou.value === "sim") {
+
+            resultado.innerHTML = `
+                <strong>🔴 RISCO ELEVADO</strong><br><br>
+                Você apresentou exposição significativa à Sarah.
+                Recomendamos procurar imediatamente a unidade
+                Anti-Sarah mais próxima.
+            `;
+
+        } else if (
+            exposicao.value === "sim" ||
+            falou.value === "sim"
+        ) {
+
+            resultado.innerHTML = `
+                <strong>🟡 RISCO MODERADO</strong><br><br>
+                Foram identificados sinais de exposição à Sarah.
+                Recomenda-se monitoramento preventivo.
+            `;
+
+        } else {
+
+            resultado.innerHTML = `
+                <strong>🟢 RISCO BAIXO</strong><br><br>
+                Nenhuma exposição significativa à Sarah foi
+                identificada durante esta avaliação.
+            `;
+
+        }
+
+        resultado.style.display = "block";
+    }
+
+</script>
+
 </body>
 </html>
